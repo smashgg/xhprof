@@ -92,7 +92,12 @@ class XHProfRuns_Default implements iXHProfRuns {
     // in which the error_log file resides.
 
     if (empty($dir)) {
-      $dir = ini_get("xhprof.output_dir");
+      $dir = null;
+      if (defined('XHPROF_OUT_DIR')) {
+        $dir = XHPROF_OUT_DIR;
+      } else {
+        $dir = ini_get("xhprof.output_dir");
+      }
       if (empty($dir)) {
 
         $dir = sys_get_temp_dir();
